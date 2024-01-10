@@ -1,0 +1,40 @@
+<div class="container border p-3">
+    <h3>New Task</h3>
+    {{#if this.errorMsg}}
+        <div class="alert alert-danger" role="alert">
+            {{this.errorMsg}}
+        </div>
+    {{/if}}
+    <form>
+        <div class="mb-3 row">
+            <label for="title" class="col-sm-3 col-form-label">Title</label>
+            <div class="col-sm-9">
+            <Input @type="text" @value={{this.title}} class="form-control" id="title" placeholder="Title"/>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="author" class="col-sm-3 col-form-label">Author</label>
+            <div class="col-sm-9">
+            <select class="form-select" id="inputGroupSelect01" {{on "change" this.handleAuthorChange}}>
+                <option value=""></option>
+                {{#each this.args.data as |author|}}
+                    <option value={{author.id}}>{{author.name}}</option>
+                {{/each}}
+            </select>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="dueDate" class="col-sm-3 col-form-label">Due Date</label>
+            <div class="col-sm-9">
+            <Input @type="date" @value={{this.dueDate}} class="form-control" id="dueDate"/>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label for="description" class="form-label">Description</label>
+            <Textarea @value={{this.description}} class="form-control" id="description"/>
+        </div>
+        <button type="button" {{on "click" this.createNewTask}} class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+{{yield}}

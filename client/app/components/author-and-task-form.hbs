@@ -1,0 +1,25 @@
+  
+  <div class="container mt-3 mb-4">
+    <div class="row mx-0">
+        <div class="col-md-6 mb-3">
+            <AuthorForm @data={{this.authors}} @updateAuthors={{this.updateAuthors}}></AuthorForm>
+        </div>
+        <div class="col-md-6">
+            <TaskForm @data={{this.authors}} @addTask={{this.addTask}}></TaskForm>
+        </div>
+    </div>
+  </div>
+
+{{!-- View All Tasks --}}
+<div class="container">
+    <h2 class="mb-3">Tasks</h2>
+    <div class="row">
+        {{#each this.tasks as |item|}}
+        <div class="col-md-4 mb-4">
+            <TaskCard @data={{item}} @removeTask={{this.removeTask}}/>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+{{yield}}

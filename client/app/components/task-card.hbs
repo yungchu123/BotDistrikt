@@ -1,0 +1,87 @@
+{{#if this.isEdit}}
+{{!-- In Edit Mode --}}
+<div class="card ms-2" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">
+        <Input @type="text" class="form-control fw-bold" 
+              @value={{this.taskState.title}} 
+              placeholder="Title" 
+              aria-label="Title" 
+              aria-describedby="basic-addon2"/>
+      </h5>
+      <p class="card-text">
+        <Textarea class="form-control"
+                  @value={{this.taskState.description}}
+                  placeholder="description"/>
+      </p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Status:</div>
+          <div class="col-8">
+              <select class="form-select" id="inputGroupSelect01" {{on "change" this.handleStatusChange}}>
+                <option value="todo">Todo </option>
+                <option value="in-progress">In-progress</option>
+                <option value="completed">Completed</option>
+              </select>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Author:</div>
+          <div class="col-8"> {{this.taskState.author.name}}
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Due on:</div>
+          <div class="col-8">
+              <Input @type="date" 
+                     @value={{this.taskState.dueDate}}
+                     style="width: 100%" id="dueDate" name="dueDate"/>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="card-body">
+      <button type="button" {{on "click" this.updateTask}} class="btn btn-primary">Confirm</button>
+    </div>
+</div>
+
+{{else}}
+{{!-- Not in Edit Mode --}}
+<div class="card ms-2" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{this.taskState.title}}</h5>
+      <p class="card-text">{{this.taskState.description}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Status:</div>
+          <div class="col-8"><span class="badge {{this.badgeColor}}">{{this.taskStatus}}</span></div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Author:</div>
+          <div class="col-8">{{this.taskState.author.name}}</div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="row">
+          <div class="col-4">Due on:</div>
+          <div class="col-8">{{this.taskState.dueDate}}</div>
+        </div>
+      </li>
+    </ul>
+    <div class="card-body">
+      <button type="button" {{on "click" this.changeToEdit}}class="btn btn-primary">Edit</button>
+      <button type="button" {{on "click" this.deleteTask}} class="btn btn-danger">Delete</button>
+    </div>
+</div>
+{{/if}}
+{{yield}}

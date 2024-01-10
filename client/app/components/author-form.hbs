@@ -1,0 +1,18 @@
+<div class="container border p-3">
+    <h3>Authors</h3>
+    <ul>
+        {{#each this.args.data as |author|}}
+            <li>{{author.name}}</li>
+        {{/each}}
+    </ul>
+    <div class="row">
+        <div class="col-8">
+            <Input @type="text" @value={{this.authorName}} class="form-control"></Input>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary" type="button" {{on "click" this.addAuthor}}>Add author</button>
+        </div>
+    </div>
+</div>
+
+{{yield}}
